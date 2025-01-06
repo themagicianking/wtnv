@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-episodepage{% endblock %}
+
+{% block content %}
+    <h1>{{ page.intro }}</h1>
+
+    <p></p>
+
+    <p><a href="{{ page.get_parent.url }}">Return to episode list</a></p>
+
+{% endblock %}

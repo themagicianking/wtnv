@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class%}template-episodepage{% endblock %}
+
+{% block content %}
+  <h1>{{ page.title }}</h1>
+
+  <div class="intro">{{ page.intro|richtext }}</div>
+
+  <p>Episode number: {{ page.episode_number}}</p>
+  <p>Episode title: {{ page.episode_title}}</p>
+  <p>Episode summary: {{ page.summary}}</p>
+
+  <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+
+{% endblock %}

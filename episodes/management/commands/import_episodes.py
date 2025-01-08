@@ -28,5 +28,3 @@ class Command(BaseCommand):
       episode_index_page.add_child(instance=episode_page)
       episode_page.save_revision().publish()
       print("published episode page " + episode["title"])
-
-print(episodes)

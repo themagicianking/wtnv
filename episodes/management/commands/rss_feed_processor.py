@@ -27,8 +27,8 @@ def parse_entry(entry):
     return {"number": num, "title": title, "summary": summary}
 
 
-for entry in feed:
-    episode = parse_entry(entry)
-    episodes.append(episode)
-
-print(episodes)
+def create_episode_list():
+    for entry in feed:
+        episode = parse_entry(entry)
+        episodes.append(episode)
+    return episodes

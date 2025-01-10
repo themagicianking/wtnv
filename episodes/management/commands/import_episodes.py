@@ -25,6 +25,9 @@ class Command(BaseCommand):
         episode_title=episode["title"],
         summary=episode["summary"]
       )
-      episode_index_page.add_child(instance=episode_page)
-      episode_page.save_revision().publish()
-      print("published episode page " + episode["title"])
+      if episode["number"] != "X":
+        episode_index_page.add_child(instance=episode_page)
+        episode_page.save_revision().publish()
+        print("published episode page " + episode["title"])
+      else:
+        print("skipped publishing episode page for " + episode["title"])

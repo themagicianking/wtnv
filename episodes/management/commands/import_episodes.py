@@ -18,7 +18,7 @@ class Command(BaseCommand):
     home.add_child(instance=episode_index_page)
     episode_index_page.save_revision().publish()
     # import episode pages
-    for episode in episodes:
+    for episode in reversed(episodes):
       episode_page = EpisodePage(
         title=episode["title"],
         episode_number=episode["number"],

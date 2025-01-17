@@ -23,8 +23,9 @@ def parse_entry(entry):
     else:
         num, title = "X", entry.title
     summary = parse_summary(entry["summary"])
+    image_url = entry["image"]["href"] if entry.get("image") else ""
 
-    return {"number": num, "title": title, "summary": summary}
+    return {"number": num, "title": title, "summary": summary, "image_url": image_url}
 
 
 def create_episode_list():

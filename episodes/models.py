@@ -12,11 +12,13 @@ class EpisodePage(Page):
     episode_number = models.CharField(max_length=250, blank=True)
     episode_title = models.CharField(max_length=250, blank=True)
     summary = models.CharField(max_length=2000, blank=True)
+    image_url = models.CharField(max_length=2000, blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel("episode_number"),
         FieldPanel("episode_title"),
-        FieldPanel("summary")
+        FieldPanel("summary"),
+        FieldPanel("image_url")
     ]
 
     search_auto_update = False

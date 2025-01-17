@@ -5,29 +5,31 @@ from .rss_feed_processor import create_episode_list
 
 episodes = create_episode_list()
 
-class Command(BaseCommand):
-  help = "Imports Welcome to Night Vale episodes from RSS feed"
 
-  def handle(self, *args, **options):
-    # delete existing episode index pages and episode pages
-    EpisodePage.objects.all().delete()
-    EpisodeIndexPage.objects.all().delete()
-    # create an episode index page
-    home = Page.objects.get(id=3)
-    episode_index_page = EpisodeIndexPage(title="Episodes")
-    home.add_child(instance=episode_index_page)
-    episode_index_page.save_revision().publish()
-    # import episode pages
-    for episode in reversed(episodes):
-      episode_page = EpisodePage(
-        title=episode["title"],
-        episode_number=episode["number"],
-        episode_title=episode["title"],
-        summary=episode["summary"]
-      )
-      if episode["number"] != "X":
-        episode_index_page.add_child(instance=episode_page)
-        episode_page.save_revision().publish()
-        print("published episode page " + episode["title"])
-      else:
-        print("skipped publishing episode page for " + episode["title"])
+class Command(BaseCommand):
+	help = "Imports Welcome to Night Vale episodes from RSS feed"
+
+	def handle(self, *args, **options):
+		# delete existing episode index pages and episode pages
+		EpisodePage.objects.all().delete()
+		EpisodeIndexPage.objects.all().delete()
+		# create an episode index page
+		home = Page.objects.get(id=3)
+		episode_index_page = EpisodeIndexPage(title="Episodes")
+		home.add_child(instance=episode_index_page)
+		episode_index_page.save_revision().publish()
+		# import episode pages
+		for episode in reversed(episodes):
+			episode_page = EpisodePage(
+				title=episode["title"],
+				episode_number=episode["number"],
+				episode_title=episode["title"],
+				summary=episode["summary"],
+				image_url=episode["image_url"],
+			)
+			if episode["number"] != "X":
+				episode_index_page.add_child(instance=episode_page)
+				episode_page.save_revision().publish()
+				print("published episode page " + episode["title"])
+			else:
+				print("skipped publishing episode page for " + episode["title"])
